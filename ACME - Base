@@ -1,0 +1,34 @@
+archive = open("processamento.txt", "r")
+archivew = open("relatória.txt", "w")
+
+linhas = archive.readlines()
+length = 0
+average = 0
+total = 0
+
+for linha in linhas:
+    nome = linha.split()[0]   # Nome dos usuários
+    size = int(linha.split()[1]) / 1048576
+    print(nome, size, "Mb")
+
+    length = length + 1   # Guarda o valor da quantidade de elementos de size
+    total = total + size    # Guarda a soma dos valores de size
+
+for linha in linhas:
+    nome = linha.split()[0]  # Nome dos usuários
+    size = int(linha.split()[1]) / 1048576
+    percent = ((size * 100) / total)    # Calcula porcentagem
+    print(nome, percent, "%")
+    archivew.write(str(size))
+    archivew.write("\n")
+    archivew.write(str(percent))
+    archivew.write("\n")
+    archivew.write("\n")
+
+average = total / length    # Média dos valores de size
+print(average, "Média de Mb por pessoa")
+print(total, "Mb total")
+
+archivew.write(str(total))
+archivew.write("\n")
+archivew.write(str(average))
